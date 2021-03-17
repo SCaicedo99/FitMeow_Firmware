@@ -3,9 +3,9 @@
 #endif
 #include <avr/io.h>
 
-#define MYUBRR ((F_CPU/4/BAUD) - 1) / 2
+extern unsigned char MYUBRR;
 
-void UART_Init(unsigned char ubrr);
-unsigned char UART_ReceiveChar();
+void UART_Init(); // It initializes the UART using 9600 baud rate as default
+unsigned char UART_ReceiveChar(unsigned int timeout);
 void UART_TransmitChar(unsigned char data);
 void UART_TransmitStr(char* StringPtr);
