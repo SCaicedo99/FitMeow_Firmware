@@ -4,7 +4,7 @@
 #define F_CPU   1000000UL
 
 // Got this from https://sites.google.com/site/qeewiki/books/avr-guide/pwm-on-the-atmega328
-int ADCsingleREAD(uint8_t adctouse)
+int ADC_single_read(uint8_t adctouse)
 {
 	int ADCval;
 
@@ -60,7 +60,7 @@ int main(void)
 	while(1)
 	{
 		 // This will read from ADC3 and map it to gravitational acceleration (G)
-		raw = ADCsingleREAD(1);
+		raw = ADC_single_read(1);
 		axixScaled = map(raw, 0, 1023, 0, 255)/1.0;
 		OCR0A = (int) axixScaled;
 		/*if(inRange(-2000.0, 2000.0, axixScaled)) OCR0A = 255; // Turn LED on if 1G is on the axis being sampled
