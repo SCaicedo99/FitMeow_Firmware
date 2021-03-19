@@ -13,10 +13,21 @@
 int main(void)
 {
 	UART_Init(MYUBRR);
-	char recv;
+	char recv[30];
+	int i = 0; 
 	while(1)
 	{
-		recv = UART_ReceiveChar();
+		while(1){
+			recv[i] = UART_ReceiveChar(1000);
+			if(recv[i] == 0) continue; 
+			if(recv[i] == '\n') {
+				recv[i+1] = '\0';
+				break;
+				}
+			i++;
+		}
+		i = 0; 
+		// recv = UART_ReceiveChar(1000);
 		if(recv){
 			UART_TransmitChar(recv);
 		}
